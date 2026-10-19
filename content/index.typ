@@ -7,32 +7,41 @@
   summary: "Fynix is a backend agnostic reactive view tree for Rust, styled with set and show rules like a Typst document. Free and open-source forever.",
 ))
 
-#ui.hero(
-  [Fy#html.span(class: "text-accent")[nix]],
-  tagline: [
-    A *backend agnostic* reactive view tree, styled the way Typst
-    styles a document.
-  ],
-  subtitle: [Free and open-source forever!],
-  actions: (
-    ui.button("/docs/", large: true)[Get Started],
-    ui.github-button("https://github.com/voxell-tech/fynix"),
-  ),
-)
-
-// The Bevy gallery, straight under the hero: the first thing a
-// visitor sees past the buttons is a real app built with Fynix.
-#html.div(class: "max-w-5xl mx-auto px-4 -mt-6 mb-8")[
-  #html.elem("img", attrs: (
-    src: "/images/gallery.webp",
-    alt: "The Bevy Fynix gallery example: buttons in each look, a keyed list, popups and docked panes",
-    class: "rounded-xl border border-text/10 shadow-2xl shadow-accent/10",
-    style: "width: 100%; height: auto;",
-  ))
-  #html.p(class: "text-subtle text-xs text-center mt-3")[
-    The Bevy backend's gallery example.
-  ]
-]
+// Hero: the copy beside a live Fynix card (js_fynix's HeroDemo,
+// mounted by assets/js/demos/hero.js) that restyles itself between
+// three themes. Its backdrop follows the skin showing, through
+// `data-skin`. Built in code mode: in markup, the whitespace between
+// elements becomes spans that the grid and flex layouts pick up.
+#html.elem("section", attrs: (class: "fx-hero", data-skin: "monokai"), {
+  html.div(class: "fx-hero-glow")[]
+  html.div(class: "fx-hero-inner", {
+    html.div(class: "fx-hero-copy", {
+      html.h1(class: "fx-hero-title", {
+        [Fy]
+        html.span(class: "fx-hero-nix")[nix]
+      })
+      html.p(class: "text-subtle text-lg sm:text-2xl mb-2")[
+        A *backend agnostic* reactive view tree, styled the way Typst
+        styles a document.
+      ]
+      html.p(class: "text-muted mb-8")[Free and open-source forever!]
+      html.div(class: "flex flex-wrap gap-3 justify-center lg:justify-start", {
+        ui.button("/docs/", large: true)[Get Started]
+        ui.github-button("https://github.com/voxell-tech/fynix")
+      })
+    })
+    html.elem("div", attrs: (
+      class: "fx-hero-stage",
+      data-demo-src: "/js/demos/hero.js",
+    ), {
+      html.div(id: "hero-demo")[]
+      html.p(class: "fx-hero-hint")[
+        Real Fynix, running in your browser. Pick a theme or flip a
+        switch: the same views restyle.
+      ]
+    })
+  })
+})
 
 #ui.hr
 

@@ -3,11 +3,13 @@
 //! runs cannot drift apart.
 
 mod each;
+mod hero;
 mod rules;
 mod states;
 mod themes;
 
 pub use each::EachDemo;
+pub use hero::HeroDemo;
 pub use rules::RulesDemo;
 pub use states::StatesDemo;
 pub use themes::ThemesDemo;

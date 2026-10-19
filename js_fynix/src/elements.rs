@@ -66,13 +66,23 @@ pub fn blend_f32(from: &f32, to: &f32, t: f32) -> f32 {
     from + (to - from) * t
 }
 
-/// How two colours blend, channel by channel.
+/// How two colours blend. Each channel is weighted by its alpha, so
+/// a fade from a transparent colour brings in the colour it reaches
+/// rather than passing through the black a transparent colour is
+/// stored as.
 pub fn blend_color(from: &Color, to: &Color, t: f32) -> Color {
+    let a = blend_f32(&from.a, &to.a, t);
+    if a <= 0.0 {
+        return Color::NONE;
+    }
+    let channel = |from_v: f32, to_v: f32| {
+        blend_f32(&(from_v * from.a), &(to_v * to.a), t) / a
+    };
     Color {
-        r: blend_f32(&from.r, &to.r, t),
-        g: blend_f32(&from.g, &to.g, t),
-        b: blend_f32(&from.b, &to.b, t),
-        a: blend_f32(&from.a, &to.a, t),
+        r: channel(from.r, to.r),
+        g: channel(from.g, to.g),
+        b: channel(from.b, to.b),
+        a,
     }
 }
 

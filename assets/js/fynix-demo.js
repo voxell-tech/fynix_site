@@ -41,14 +41,22 @@ function run(container, demo, token) {
   requestAnimationFrame(step);
 }
 
-function mount(selector, name) {
+function mount(selector, name, onMount) {
   const container = document.querySelector(selector);
   if (!container || container.dataset.mounted) return;
   const token = String(++mounts);
   container.dataset.mounted = token;
   ready ??= init();
   ready
-    .then(() => run(container, new fynix[name](container), token))
+    .then(() => {
+      const demo = new fynix[name](container);
+      run(container, demo, token);
+      // Whether `demo` is still the one running: once it is not, it
+      // has been freed and must not be called.
+      const alive = () =>
+        container.isConnected && container.dataset.mounted === token;
+      onMount?.(demo, container, alive);
+    })
     .catch((err) => {
       console.error("fynix-demo: failed to mount", selector, err);
     });
@@ -56,11 +64,14 @@ function mount(selector, name) {
 
 // Mounts the demo struct `name` (e.g. "ThemesDemo") into the element
 // at `selector`, now and after every navigation that brings it back.
-export function mountDemo(selector, name) {
-  demos.set(selector, name);
-  mount(selector, name);
+// `onMount(demo, container, alive)`, if given, runs after each mount.
+export function mountDemo(selector, name, onMount) {
+  demos.set(selector, [name, onMount]);
+  mount(selector, name, onMount);
 }
 
 document.addEventListener("tola:navigate", () => {
-  for (const [selector, name] of demos) mount(selector, name);
+  for (const [selector, [name, onMount]] of demos) {
+    mount(selector, name, onMount);
+  }
 });

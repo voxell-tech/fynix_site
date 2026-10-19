@@ -93,3 +93,75 @@
     @apply items-center justify-center;
     min-height: 6rem;
 }
+
+/* Landing hero (content/index.typ, assets/js/demos/hero.js). It
+   breaks out of the kit's centred column to fill the screen under
+   the nav (49px tall); `main` pads 2rem above it, which the negative
+   margin takes back. */
+body {
+    overflow-x: clip;
+}
+
+.fx-hero {
+    @apply relative flex items-center overflow-hidden;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top: -2rem;
+    min-height: calc(100svh - 49px);
+    --glow-a: #fc9867;
+    --glow-b: #ab9df2;
+}
+.fx-hero[data-skin="paper"] {
+    --glow-a: #78a8ff;
+    --glow-b: #78dce8;
+}
+.fx-hero[data-skin="candy"] {
+    --glow-a: #ff6fb5;
+    --glow-b: #c49bff;
+}
+
+/* Two soft lights behind the card, in the skin's colours. */
+.fx-hero-glow {
+    @apply absolute inset-0 pointer-events-none;
+    background:
+        radial-gradient(ellipse 38% 50% at 72% 45%, color-mix(in srgb, var(--glow-a) 28%, transparent), transparent 70%),
+        radial-gradient(ellipse 30% 40% at 88% 80%, color-mix(in srgb, var(--glow-b) 22%, transparent), transparent 70%),
+        radial-gradient(ellipse 30% 40% at 15% 20%, color-mix(in srgb, var(--glow-b) 10%, transparent), transparent 70%);
+    transition: background 0.8s ease;
+}
+@property --glow-a {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #fc9867;
+}
+@property --glow-b {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ab9df2;
+}
+.fx-hero {
+    transition: --glow-a 0.8s ease, --glow-b 0.8s ease;
+}
+
+.fx-hero-inner {
+    @apply relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-12 items-center lg:grid-cols-[1.1fr_1fr];
+}
+
+.fx-hero-copy {
+    @apply text-center lg:text-left;
+}
+
+.fx-hero-title {
+    @apply text-7xl sm:text-9xl font-black tracking-tighter leading-none mb-6;
+}
+.fx-hero-nix {
+    color: var(--color-accent);
+}
+
+.fx-hero-stage {
+    @apply flex flex-col gap-3 w-full max-w-md mx-auto;
+}
+
+.fx-hero-hint {
+    @apply text-center text-xs text-muted;
+}

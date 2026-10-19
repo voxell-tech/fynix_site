@@ -13,4 +13,6 @@ mod tokens;
 mod ui;
 mod views;
 
-pub use demos::{EachDemo, RulesDemo, StatesDemo, ThemesDemo};
+pub use demos::{
+    EachDemo, HeroDemo, RulesDemo, StatesDemo, ThemesDemo,
+};

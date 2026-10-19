@@ -101,6 +101,11 @@ impl World {
         }
     }
 
+    /// Every node built into this world.
+    pub(crate) fn nodes(&self) -> Vec<Node> {
+        self.nodes.keys().copied().collect()
+    }
+
     pub(crate) fn el(&self, node: Node) -> Option<&HtmlElement> {
         self.nodes.get(&node).map(|data| &data.el)
     }

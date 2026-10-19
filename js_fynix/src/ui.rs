@@ -31,6 +31,14 @@ impl<T: Theme> Ui<T> {
         cx.build(view)
     }
 
+    /// Re-reads every prop of every element at the next frame, for
+    /// a theme whose tokens just changed.
+    pub fn restyle(&mut self) {
+        for node in self.world.nodes() {
+            self.mounted.mark_dirty(node);
+        }
+    }
+
     /// Runs one frame, `delta` after the last: the pointer, clicks,
     /// `keyed` and `each` rebuilds, then every element's writes.
     pub fn frame(&mut self, delta: Duration, reduced_motion: bool) {

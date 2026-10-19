@@ -34,6 +34,61 @@ export class EachDemo {
 if (Symbol.dispose) EachDemo.prototype[Symbol.dispose] = EachDemo.prototype.free;
 
 /**
+ * [`card`] over [`controls`], under [`Live`].
+ */
+export class HeroDemo {
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        HeroDemoFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_herodemo_free(ptr, 0);
+    }
+    /**
+     * @param {number} dt_ms
+     * @param {boolean} reduced_motion
+     */
+    frame(dt_ms, reduced_motion) {
+        wasm.herodemo_frame(this.__wbg_ptr, dt_ms, reduced_motion);
+    }
+    /**
+     * @param {HTMLElement} container
+     */
+    constructor(container) {
+        const ret = wasm.herodemo_new(container);
+        this.__wbg_ptr = ret;
+        HeroDemoFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+    /**
+     * Moves to the next skin, for the page to show them off.
+     */
+    next_skin() {
+        wasm.herodemo_next_skin(this.__wbg_ptr);
+    }
+    /**
+     * The skin showing, by name, for the page's own colours.
+     * @returns {string}
+     */
+    skin() {
+        let deferred1_0;
+        let deferred1_1;
+        try {
+            const ret = wasm.herodemo_skin(this.__wbg_ptr);
+            deferred1_0 = ret[0];
+            deferred1_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+}
+if (Symbol.dispose) HeroDemo.prototype[Symbol.dispose] = HeroDemo.prototype.free;
+
+/**
  * [`rules`], built in a card.
  */
 export class RulesDemo {
@@ -254,7 +309,7 @@ function __wbg_get_imports() {
             return ret;
         },
         __wbindgen_generic_0000000000000001: function(arg0, arg1) {
-            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("PointerEvent")], shim_idx: 136, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [NamedExternref("PointerEvent")], shim_idx: 297, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
             const ret = makeMutClosure(arg0, arg1, wasm_bindgen_8c1e0d72ad4d2dc1___convert__closures_____invoke___web_sys_7f7fa06ddc1445fa___features__gen_PointerEvent__PointerEvent______true_);
             return ret;
         },
@@ -281,6 +336,9 @@ function wasm_bindgen_8c1e0d72ad4d2dc1___convert__closures_____invoke___web_sys_
 const EachDemoFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_eachdemo_free(ptr, 1));
+const HeroDemoFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_herodemo_free(ptr, 1));
 const RulesDemoFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_rulesdemo_free(ptr, 1));
