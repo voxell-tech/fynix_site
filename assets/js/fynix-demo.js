@@ -9,7 +9,10 @@
 // Each loop stops and frees its demo once its container leaves the
 // page or is mounted again (a navigation can morph the same element
 // in place), and idles while offscreen or while the tab is hidden.
-import init, * as fynix from "/wasm/js_fynix.mjs";
+//
+// The glue and wasm are loaded from the hashed addresses the page puts
+// on each demo's shell (components/demo.typ's `wasm-attrs`), so the two
+// always come from the same build, whatever a browser has cached.
 
 let ready;
 let mounts = 0;
@@ -41,14 +44,25 @@ function run(container, demo, token) {
   requestAnimationFrame(step);
 }
 
+// Imports the glue and starts the wasm named on `container`'s shell,
+// once, resolving to the glue's exports.
+async function load(container) {
+  const shell = container.closest("[data-fynix-glue]");
+  const glue = shell?.dataset.fynixGlue ?? "/wasm/js_fynix.mjs";
+  const wasm = shell?.dataset.fynixWasm;
+  const fynix = await import(glue);
+  await fynix.default(wasm ? { module_or_path: wasm } : undefined);
+  return fynix;
+}
+
 function mount(selector, name, onMount) {
   const container = document.querySelector(selector);
   if (!container || container.dataset.mounted) return;
   const token = String(++mounts);
   container.dataset.mounted = token;
-  ready ??= init();
+  ready ??= load(container);
   ready
-    .then(() => {
+    .then((fynix) => {
       const demo = new fynix[name](container);
       run(container, demo, token);
       // Whether `demo` is still the one running: once it is not, it

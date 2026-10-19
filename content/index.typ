@@ -1,6 +1,6 @@
 #import "@tola/source:0.0.0": tola-meta
 #import "/shared/site/ui.typ" as ui
-#import "/components/demo.typ": showcase
+#import "/components/demo.typ": showcase, wasm-attrs
 
 #tola-meta((
   title: none,
@@ -33,6 +33,7 @@
     html.elem("div", attrs: (
       class: "fx-hero-stage",
       data-demo-src: "/js/demos/hero.js",
+      ..wasm-attrs,
     ), {
       html.div(id: "hero-demo")[]
       html.p(class: "fx-hero-hint")[
