@@ -1,0 +1,13 @@
+/public
+/.public-publish
+/.tola
+/.tola-build.lock
+/assets/generated
+/node_modules
+content/.tola
+.DS_Store
+
+# Agent skills (e.g. `npx skills add`), local tooling, not site content.
+/.agents
+/.claude
+/skills-lock.json

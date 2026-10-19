@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+/* Shared theme, base styles, theme-toggle + social-icon CSS, then the
+   project site kit's own styles. */
+@source "../../shared";
+@import "../../shared/styles.css";
+@import "../../shared/site/site.css";
+
+/* Fynix's accent is Monokai Pro's orange, a phoenix's fire, where
+   MotionGfx's is the cyan the shared theme defaults to. The light
+   value is site.css's own light --color-orange. */
+@theme {
+    --color-accent: #fc9867;
+}
+
+[data-theme="light"] {
+    --color-accent: #b55e1e;
+}

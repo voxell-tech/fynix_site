@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fynix.voxell.dev/sitemap.xml
