@@ -32,6 +32,8 @@ generates = ["assets/generated/tailwind.css"]
 # Adds ?h=<hash> to URLs from `url-of-asset` (the stylesheet and favicon).
 cache-busting = true
 trees = [
+  { source = "assets/js", url-prefix = "/js" },
+  { source = "assets/wasm", url-prefix = "/wasm" },
   { source = "assets/images", url-prefix = "/images" },
   { source = "shared/icons", url-prefix = "/icons" },
   { source = "shared/scripts", url-prefix = "/scripts" },

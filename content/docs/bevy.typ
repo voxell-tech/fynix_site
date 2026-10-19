@@ -14,6 +14,13 @@ against `bevy_ui` (`Label`, `Frame`, `Icon`), composites (`row`,
 `column`, `button`, `foldable`), the token traits they read, and the
 states rules wait on.
 
+#html.elem("img", attrs: (
+  src: "/images/gallery.webp",
+  alt: "The Bevy Fynix gallery example: buttons in each look, a keyed list, popups and docked panes",
+  class: "my-6 rounded-lg border border-text/10",
+  style: "width: 100%; height: auto;",
+))
+
 This page assumes a working Bevy project. If you don't have one yet,
 #link("https://bevy.org/learn/quick-start/getting-started/setup/")[Bevy's own Quick Start guide]
 walks through creating one.

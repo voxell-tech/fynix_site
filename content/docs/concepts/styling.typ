@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/visuals.typ": ladder, pieces
 
 #tola-meta((
   title: "Styling",
@@ -25,18 +26,14 @@ Three things decide how a view looks, and they stay apart:
 
 == Layers
 
-From weakest to strongest:
-
-#table(
-  columns: 2,
-  table.header([Layer], [Example]),
-  [View default], [a theme token],
-  [Composite defaults], [`cx.defaults(..)`],
-  [Set rules, outer then inner], [`cx.set::<Label>(|l, _| l.size(12.0))`],
-  [State rules from ancestors], [`row(..).when::<Hovered, _>(..)`],
-  [Call site], [`label("x").size(20.0)`],
-  [State rules on the node itself], [`label("x").when::<Hovered, _>(..)`],
-)
+#ladder((
+  ([View default], [a theme token]),
+  ([Composite defaults], [`cx.defaults(..)`]),
+  ([Set rules, outer then inner], [`cx.set::<Label>(|l, _| l.size(12.0))`]),
+  ([State rules from ancestors], [`row(..).when::<Hovered, _>(..)`]),
+  ([Call site], [`label("x").size(20.0)`]),
+  ([State rules on the node itself], [`label("x").when::<Hovered, _>(..)`]),
+))
 
 Show rules then transform the result. Of several state rules on one
 node, the one in the outer scope wins, and within one scope the one

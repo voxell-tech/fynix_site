@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/visuals.typ": pieces
 
 #tola-meta((
   title: "Elements",
@@ -12,6 +13,12 @@ An element is a struct of props that ends up on one node. Each prop
 names the `Patch` that writes it to the node, and `#[element]` writes
 the rest: the unset state, a builder method per prop, and the updates
 when a bound prop changes.
+
+#pieces((
+  ([Props], [A struct, one field per prop.], none),
+  ([`#[element]`], [Writes the builders, defaults and updates.], none),
+  ([`Patch`], [Writes each value onto the node.], none),
+))
 
 The examples in these Concepts pages run against a toy backend from
 #link("https://github.com/voxell-tech/fynix/blob/main/crates/fynix/docs/toy.rs")[`docs/toy.rs`]:

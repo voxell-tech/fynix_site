@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/demo.typ": live-demo
 
 #tola-meta((
   title: "Views",
@@ -18,9 +19,8 @@ A view is a struct that owns its props. There are three kinds:
 - *Wrappers* add something to any view: `.when(..)`,
   `.transition(..)`, `.rules(..)`, `.on_activate(..)`.
 
-Because a composite's parts are ordinary views, a set rule for `Label`
-reaches the label inside a `button` the same way it reaches one on its
-own.
+So a set rule for `Label` reaches the label inside a `button` the same
+way it reaches one on its own.
 
 == Changing Structure
 
@@ -53,6 +53,12 @@ each(
 
 A row whose id stays keeps its node, so a transition under way on it
 survives a reorder.
+
+#live-demo(
+  "each-demo",
+  "/js/demos/each.js",
+  caption: [Add, remove and reverse the rows.],
+)
 
 == Transitions
 

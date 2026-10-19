@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/demo.typ": live-demo
 
 #tola-meta((
   title: "State Rules",
@@ -10,6 +11,12 @@
 
 A state rule holds only while its view is in a state, such as hovered.
 Rules set inside it reach every view under that view.
+
+#live-demo(
+  "states-demo",
+  "/js/demos/states.js",
+  caption: [Hover and press the buttons.],
+)
 
 ```rust
 fn main() {

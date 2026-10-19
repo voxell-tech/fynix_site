@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/demo.typ": live-demo
 
 #tola-meta((
   title: "Tokens and Themes",
@@ -12,6 +13,12 @@ A token trait, like `TextTokens` on #link("/docs/concepts/elements/")[Elements],
 is all a view knows about a theme. A theme is any type that implements
 the token traits its views read, so swapping the theme restyles every
 view that reads it.
+
+#live-demo(
+  "themes-demo",
+  "/js/demos/themes.js",
+  caption: [One `card()` view, mounted under three themes.],
+)
 
 ```rust
 struct Large;
@@ -29,11 +36,11 @@ fn main() {
 }
 ```
 
-== Ask for Roles, Not Values
+== Ask for Roles
 
-Tokens name a role, never a raw value: `Tone::Dim` for secondary text,
-`theme.hover()` for a hovered surface. A view that only says which role
-it plays looks right under every theme.
+A token names a role: `Tone::Dim` for secondary text, `theme.hover()`
+for a hovered surface. A view that only says which role it plays looks
+right under every theme.
 
 Bevy Fynix's views read four token traits:
 
@@ -43,13 +50,13 @@ Bevy Fynix's views read four token traits:
 - `MotionTokens`: the `Curve` for each kind of `Motion`.
 
 Many tokens have defaults built from others, so a theme implements only
-the few it has to. #link("/docs/bevy/")[Bevy Fynix] has a whole theme
-in one block.
+the few without one. #link("/docs/bevy/")[Bevy Fynix] shows a whole
+theme.
 
 == Motion Is a Token Too
 
-How long a transition takes, and how it eases, comes from the theme's
-`MotionTokens`, like any other token.
+How long a transition takes and how it eases come from the theme's
+`MotionTokens`.
 
 ```rust
 impl MotionTokens for Warm {

@@ -6,6 +6,8 @@
 /node_modules
 content/.tola
 .DS_Store
+/js_fynix/target
+/js_fynix/pkg
 
 # Agent skills (e.g. `npx skills add`), local tooling, not site content.
 /.agents

@@ -37,5 +37,4 @@ backend.
 == Then Learn the Concepts
 
 Once a view is on screen, #link("/docs/concepts/elements/")[Concepts]
-walks through how Fynix builds and styles a tree, one short page at a
-time. It applies to every backend equally.
+covers how Fynix builds and styles a tree. It holds on every backend.

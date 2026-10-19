@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/visuals.typ": ladder, pieces
 
 #tola-meta((
   title: "Building a UI Framework",
@@ -13,6 +14,14 @@ A framework on top of it fills in five things, and
 #link("/docs/bevy/")[Bevy Fynix] is a full example of each.
 
 == The Five Pieces
+
+#pieces((
+  ([Backend], [What a world and a node are.], none),
+  ([Elements], [How each prop is written.], "/docs/concepts/elements/"),
+  ([Token traits], [What a theme must answer.], "/docs/concepts/themes/"),
+  ([States], [When a state rule holds.], "/docs/concepts/states/"),
+  ([Mount], [Build at the root, then run frames.], none),
+))
 
 + *A backend*, which says what a world and a node are. `spawn`,
   `despawn` and `reorder` are required. `on_mount`, `leave`, `hold`,

@@ -16,3 +16,80 @@
 [data-theme="light"] {
     --color-accent: #b55e1e;
 }
+
+/* Live Fynix demos (assets/js/fynix-demo.js, built from js_fynix/).
+   Fynix writes each node's colours, sizes and motion as inline
+   styles from the demo's own theme; these rules are only the box a
+   demo sits in, and what every node it builds starts from. The box
+   stays dark in both site themes, like a screenshot of an app. */
+.fynix-demo-shell {
+    @apply rounded-lg border border-text/10 p-5 sm:p-6 overflow-hidden;
+    background: #19181a;
+    color-scheme: dark;
+}
+
+/* Every frame is a flex box; a border shows once a width is set. */
+.fx-frame {
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    border: 0 solid transparent;
+    min-width: 0;
+}
+
+.fx-label {
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.fx-button {
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+/* The themes demo: one pane per theme, each with its own backdrop,
+   stacked so each card has the column's full width beside its code. */
+#themes-demo {
+    @apply grid gap-4;
+}
+
+.fx-pane {
+    @apply flex flex-col gap-3 rounded-lg p-4 sm:p-5;
+}
+
+.fx-caption {
+    @apply text-xs font-semibold uppercase tracking-wide;
+}
+
+.fx-dark {
+    background: #2d2a2e;
+}
+.fx-dark .fx-caption {
+    color: #939293;
+}
+
+.fx-light {
+    background: #e9ecef;
+}
+.fx-light .fx-caption {
+    color: #6e7781;
+}
+
+.fx-candy {
+    background: linear-gradient(135deg, #ffd6ec, #e9d5ff);
+}
+.fx-candy .fx-caption {
+    color: #8a6a99;
+}
+
+#rules-demo,
+#states-demo,
+#each-demo {
+    @apply flex flex-col;
+}
+
+#states-demo {
+    @apply items-center justify-center;
+    min-height: 6rem;
+}

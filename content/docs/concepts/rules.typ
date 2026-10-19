@@ -1,4 +1,5 @@
 #import "@tola/source:0.0.0": tola-meta
+#import "/components/demo.typ": live-demo
 
 #tola-meta((
   title: "Set and Show Rules",
@@ -12,6 +13,12 @@ Fynix styles a tree the way
 #link("https://typst.app")[Typst] styles a document. A rule names a
 kind of view and changes every view of that kind built after it, until
 its scope ends.
+
+#live-demo(
+  "rules-demo",
+  "/js/demos/rules.js",
+  caption: [Set, override, show and scope, running live.],
+)
 
 == Set Rules
 
